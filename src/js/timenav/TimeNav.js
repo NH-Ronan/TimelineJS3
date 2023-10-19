@@ -254,13 +254,32 @@ export class TimeNav {
         this._groups = [];
         var group_labels = this.timescale.getGroupLabels();
 
+        // TODO: Change this condition to a new option (original_group_order)
+        if (true) {
+            group_labels = this._original_order_group_labels(group_labels);
+        }
+
         if (group_labels) {
             this.options.has_groups = true;
             for (var i = 0; i < group_labels.length; i++) {
                 this._createGroup(group_labels[i]);
             }
         }
+    }
 
+    _original_order_group_labels(group_labels) {
+        var original_labels_order = [...new Set(Object.values(this.config.event_dict).map((data) => data.group))];
+        var original_group_labels = [];
+
+        for (var i = 0; i < original_labels_order.length; i++) {
+            var group_label = group_labels.find((gp) => gp.label == original_labels_order[i]);
+
+            if (group_label) {
+                original_group_labels[i] = group_label;
+            }
+        }
+
+        return original_group_labels;
     }
 
     _createGroup(group_label) {
