@@ -197,8 +197,8 @@ export class TimeNav {
         return new TimeScale(this.config, {
             display_width: this._el.container.offsetWidth,
             screen_multiplier: this.options.scale_factor,
-            max_rows: this.max_rows
-
+            max_rows: this.max_rows,
+            original_group_order: this.options.original_group_order,
         });
     }
 
@@ -254,8 +254,7 @@ export class TimeNav {
         this._groups = [];
         var group_labels = this.timescale.getGroupLabels();
 
-        // TODO: Change this condition to a new option (original_group_order)
-        if (true) {
+        if (this.options.original_group_order) {
             group_labels = this._original_order_group_labels(group_labels);
         }
 

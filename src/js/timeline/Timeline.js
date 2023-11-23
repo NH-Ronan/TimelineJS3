@@ -143,6 +143,7 @@ class Timeline {
             sheets_proxy: 'https://sheets-proxy.knightlab.com/proxy/',
             soundcite: false,
             unlinkify: true,
+            original_group_order: false,
         };
 
         // Animation Objects

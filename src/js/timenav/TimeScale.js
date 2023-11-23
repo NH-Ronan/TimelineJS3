@@ -26,7 +26,6 @@ const AXIS_TICK_DATEFORMAT_LOOKUP = {
 export class TimeScale {
 
     constructor(timeline_config, options) {
-
         var slides = timeline_config.events;
         this._scale = timeline_config.scale;
 
@@ -39,8 +38,12 @@ export class TimeScale {
         this._display_width = options.display_width;
         this._screen_multiplier = options.screen_multiplier;
         this._pixel_width = this._screen_multiplier * this._display_width;
+        this._original_group_order = options.original_group_order;
 
-        this._group_labels = undefined;
+        if (this._original_group_order) {
+            this._group_labels = [...new Set(Object.values(timeline_config.event_dict).map((data) => data.group))];
+        }
+
         this._positions = [];
         this._pixels_per_milli = 0;
 
@@ -226,7 +229,7 @@ export class TimeScale {
     _computePositionInfo(slides, max_rows, default_marker_width) {
         default_marker_width = default_marker_width || 100;
 
-        var groups = [];
+        var groups = this._group_labels ? this._group_labels : [];
         var empty_group = false;
 
         // Set start/end/width; enumerate groups
@@ -249,11 +252,15 @@ export class TimeScale {
                 pos_info.end = pos_info.start + default_marker_width;
             }
 
-            if (slides[i].group) {
-                if (groups.indexOf(slides[i].group) < 0) {
-                    groups.push(slides[i].group);
+            if (!this._original_group_order) {
+                if(slides[i].group) {
+                    if(groups.indexOf(slides[i].group) < 0) {
+                        groups.push(slides[i].group);
+                    }
                 }
-            } else {
+            }
+
+            if (!slides[i].group) {
                 empty_group = true;
             }
         }
