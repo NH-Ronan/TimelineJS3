@@ -95,11 +95,11 @@ export class SlideNav {
 		this.data = mergeData(this.data, d);
 
         // Title
-        const title = unlinkify(this.data.title);
+        const title = this.options.unlinkify ? unlinkify(this.data.title) : this.data.title;
         this._el.title.innerHTML = title;
 
         // Date
-        const date = unlinkify(this.data.date);
+        const date = this.options.unlinkify ? unlinkify(this.data.date) : this.data.date;
         this._el.description.innerHTML = date;
 
         // Alternative text

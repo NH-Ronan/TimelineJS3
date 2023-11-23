@@ -444,9 +444,9 @@ export function findArrayNumberByUniqueID(id, array, prop, defaultVal) {
 }
 
 export function unlinkify(text) {
-    // if (!text) return text;
-    // text = text.replace(/<a\b[^>]*>/i, "");
-    // text = text.replace(/<\/a>/i, "");
+    if (!text) return text;
+    text = text.replace(/<a\b[^>]*>/i, "");
+    text = text.replace(/<\/a>/i, "");
     return text;
 }
 

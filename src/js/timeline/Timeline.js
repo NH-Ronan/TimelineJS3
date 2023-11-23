@@ -142,6 +142,7 @@ class Timeline {
             // postfixing. The default proxy should work in most cases, but only for TimelineJS sheets.
             sheets_proxy: 'https://sheets-proxy.knightlab.com/proxy/',
             soundcite: false,
+            unlinkify: true,
         };
 
         // Animation Objects

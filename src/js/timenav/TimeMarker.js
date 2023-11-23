@@ -306,16 +306,15 @@ export class TimeMarker {
 
 		}
 
-
 		// Text
 		this._el.text = DOM.create("div", "tl-timemarker-text", this._el.content);
 		this._text = DOM.create("h2", "tl-headline", this._el.text);
 		if (this.data.text.headline && this.data.text.headline != "") {
-			this._text.innerHTML = unlinkify(this.data.text.headline);
+			this._text.innerHTML = this.options.unlinkify ? unlinkify(this.data.text.headline) : this.data.text.headline;
 		} else if (this.data.text.text && this.data.text.text != "") {
-			this._text.innerHTML = unlinkify(this.data.text.text);
+			this._text.innerHTML = this.options.unlinkify ? unlinkify(this.data.text.text) : this.data.text.text;
 		} else if (this.data.media && this.data.media.caption && this.data.media.caption != "") {
-			this._text.innerHTML = unlinkify(this.data.media.caption);
+			this._text.innerHTML = this.options.unlinkify ? unlinkify(this.data.media.caption) : this.data.media.caption;
 		}
 
         const date = this.getFormattedDate();

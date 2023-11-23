@@ -392,12 +392,11 @@ export class StorySlider {
     /*	Init
     ================================================== */
     _initLayout() {
-
         this._el.container.classList.add('tl-storyslider');
 
         // Create Navigation
-        this._nav.previous = new SlideNav({ title: "Previous", description: "description" }, { direction: "previous" }, this._el.container);
-        this._nav.next = new SlideNav({ title: "Next", description: "description" }, { direction: "next" }, this._el.container);
+        this._nav.previous = new SlideNav({ title: "Previous", description: "description" }, { direction: "previous", unlinkify: this.options.unlinkify }, this._el.container);
+        this._nav.next = new SlideNav({ title: "Next", description: "description" }, { direction: "next", unlinkify: this.options.unlinkify }, this._el.container);
 
         // Create Layout
         this._el.slider_container_mask = DOM.create('div', 'tl-slider-container-mask', this._el.container);
